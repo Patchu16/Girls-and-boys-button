@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .imgContainer {
+            display: none;
+        }
+        .imgContainer img {
+           
+            width: 300px;
+            height: 200px;
+          
+            object-fit: cover;
+        }
+        .imgContainer img.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1><u>My Frienemies</u></h1>
+
+<button onclick="showImage('girls')">Girls</button>
+<button onclick="showImage('boys')">Boys</button>
+
+<div id="girls" class="imgContainer">
+    <img src="1.jpg" class="active">
+    <img src="1.jpg">
+    <img src="2.jpg">
+    <img src="3.jpg">
+    <img src="4.jpg">
+    <img src="5.jpg">
+</div>
+
+<div id="boys" class="imgContainer">
+    <img src="6.jpg" class="active">
+    <img src="6.jpg">
+    
+    <img src="7.jpg">
+    <img src="8.jpg">
+    <img src="9.jpg">
+    <img src="10.jpg">
+</div>
+
+<script>
+var currentImageIndexGirls = 0;
+var currentImageIndexBoys = 0;
+
+function showImage(containerId) {
+    var girlsContainer = document.getElementById('girls');
+    var boysContainer = document.getElementById('boys');
+    
+    if(containerId === 'girls') {
+        girlsContainer.style.display = 'block';
+        boysContainer.style.display = 'none';
+    } else {
+        boysContainer.style.display = 'block';
+        girlsContainer.style.display = 'none';
+    }
+
+    var container = document.getElementById(containerId);
+    var images = container.getElementsByTagName('img');
+    var currentImageIndex = containerId === 'girls' ? currentImageIndexGirls : currentImageIndexBoys;
+    var currentImage = images[currentImageIndex];
+    currentImage.style.display = 'none';
+    currentImage.classList.remove('active');
+
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    var nextImage = images[currentImageIndex];
+    nextImage.style.display = 'block';
+    nextImage.classList.add('active');
+
+    if(containerId === 'girls') {
+        currentImageIndexGirls = currentImageIndex;
+    } else {
+        currentImageIndexBoys = currentImageIndex;
+    }
+}
+</script>
+
+</body>
+</html>
